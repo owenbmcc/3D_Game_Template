@@ -1,32 +1,50 @@
 extends KinematicBody
 
+# controller variables, add export to the front to expose to editor
 var speed = 10
+var mouse_sensitivity = 0.03
+var gravity = 20
+var jump = 10
+
+# smooths out jumping acceleration
 var h_acceleration = 6
 var air_acceleration = 1
 var normal_acceleration = 6
-export var mouse_sensitivity = 0.03
-var gravity = 20
-export var jump = 10
+
+# member variables for tracking movement
 var full_contact = false
-
-
 var direction = Vector3()
 var h_velocity = Vector3()
 var movement = Vector3()
 var gravity_vec = Vector3()
 
+# loads references to player head and ground check
 onready var head = $Head
 onready var ground_check = $GroundCheck
 
+# runs once when scene opens
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+# processes input from mouse and keyboard
 func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		get_tree().quit() # Quits the game
+		
+	# to expose mouse on key press, need to add to input map
+	if event.is_action_pressed("change_mouse_input"):
+		match Input.get_mouse_mode():
+			Input.MOUSE_MODE_CAPTURED:
+				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			Input.MOUSE_MODE_VISIBLE:
+				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
 	if event is InputEventMouseMotion:
 		rotate_y(deg2rad(-event.relative.x * mouse_sensitivity))
 		head.rotate_x(deg2rad(-event.relative.y * mouse_sensitivity))
 		head.rotation.x = clamp(head.rotation.x, deg2rad(-89), deg2rad(89))
-		
+
+# updates scene physics every frame
 func _physics_process(delta):
 	direction = Vector3()
 	
