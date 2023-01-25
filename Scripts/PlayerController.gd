@@ -1,11 +1,19 @@
 extends KinematicBody
 
 # controller variables, add export to the front to expose to editor
+# like: export speed = 7
 var speed = 7
+var default_speed = speed
 var mouse_sensitivity = 0.1
 var gravity = 9.8
 var jump = 5
 var cam_accel = 40
+
+# sprinting stuff, can export as well
+var sprint_speed = 14
+var can_sprint = false # use sprinting at all
+var toggle_sprint = false # toggle sprint on off instead of holding
+var is_sprinting = false
 
 # smooths out jumping acceleration
 var snap
@@ -58,12 +66,27 @@ func _process(delta):
 		
 # updates scene physics every frame
 func _physics_process(delta):
+	
 	# keyboard input
 	direction = Vector3.ZERO
 	var h_rot = global_transform.basis.get_euler().y
 	var f_input = Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")
 	var h_input = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	direction = Vector3(h_input, 0, f_input).rotated(Vector3.UP, h_rot).normalized()
+	
+	# sprinting stuff
+	speed = default_speed
+	if can_sprint:
+		if toggle_sprint:
+			if Input.is_action_just_pressed("sprint") and not is_sprinting:
+				is_sprinting = true
+			elif Input.is_action_just_pressed("sprint") and is_sprinting:
+				is_sprinting = false
+		else:
+			is_sprinting = Input.is_action_pressed("sprint")
+		
+		if is_sprinting:
+			speed = sprint_speed
 	
 	if is_on_floor():
 		snap = -get_floor_normal()
