@@ -1,26 +1,27 @@
 extends KinematicBody
 
 # controller variables, add export to the front to expose to editor
-var speed = 10
-var mouse_sensitivity = 0.03
-var gravity = 20
-var jump = 10
+var speed = 7
+var mouse_sensitivity = 0.1
+var gravity = 9.8
+var jump = 5
+var cam_accel = 40
 
 # smooths out jumping acceleration
-var h_acceleration = 6
-var air_acceleration = 1
-var normal_acceleration = 6
+var snap
+const ACCEL_DEFAULT = 7
+const ACCEL_AIR = 1
+onready var accel = ACCEL_DEFAULT
 
 # member variables for tracking movement
-var full_contact = false
 var direction = Vector3()
-var h_velocity = Vector3()
+var velocity = Vector3()
 var movement = Vector3()
 var gravity_vec = Vector3()
 
-# loads references to player head and ground check
+# loads references to player head and camera
 onready var head = $Head
-onready var ground_check = $GroundCheck
+onready var camera = $Head/Camera
 
 # runs once when scene opens
 func _ready():
@@ -44,41 +45,40 @@ func _input(event):
 		head.rotate_x(deg2rad(-event.relative.y * mouse_sensitivity))
 		head.rotation.x = clamp(head.rotation.x, deg2rad(-89), deg2rad(89))
 
+func _process(delta):
+	# camera physics interpolation
+	if Engine.get_frames_per_second() > Engine.iterations_per_second:
+		camera.set_as_toplevel(true)
+		camera.global_transform.origin = camera.global_transform.origin.linear_interpolate(head.global_transform.origin, cam_accel * delta)
+		camera.rotation.y = rotation.y
+		camera.rotation.x = head.rotation.x
+	else:
+		camera.set_as_toplevel(false)
+		camera.global_transform = head.global_transform
+		
 # updates scene physics every frame
 func _physics_process(delta):
-	direction = Vector3()
+	# keyboard input
+	direction = Vector3.ZERO
+	var h_rot = global_transform.basis.get_euler().y
+	var f_input = Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")
+	var h_input = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	direction = Vector3(h_input, 0, f_input).rotated(Vector3.UP, h_rot).normalized()
 	
-	if ground_check.is_colliding():
-		full_contact = true
+	if is_on_floor():
+		snap = -get_floor_normal()
+		accel = ACCEL_DEFAULT
+		gravity_vec = Vector3.ZERO
 	else:
-		full_contact = false
-	
-	if not is_on_floor():
+		snap = Vector3.DOWN
+		accel = ACCEL_AIR
 		gravity_vec += Vector3.DOWN * gravity * delta
-		h_acceleration = air_acceleration
-	elif is_on_floor() and full_contact:
-		gravity_vec = -get_floor_normal() * gravity
-		h_acceleration = normal_acceleration
-	else:
-		gravity_vec = -get_floor_normal()
-		h_acceleration = normal_acceleration
 	
-	if Input.is_action_just_pressed("jump") and (is_on_floor() or ground_check.is_colliding()):
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		snap = Vector3.ZERO
 		gravity_vec = Vector3.UP * jump
 	
-	if Input.is_action_pressed("move_forward"):
-		direction -= transform.basis.z
-	elif Input.is_action_pressed("move_backward"):
-		direction += transform.basis.z
-		
-	if Input.is_action_pressed("move_left"):
-		direction -= transform.basis.x
-	elif Input.is_action_pressed("move_right"):
-		direction += transform.basis.x
-		
-	direction = direction.normalized()
-	h_velocity = h_velocity.linear_interpolate(direction * speed, h_acceleration * delta)
-	movement.z = h_velocity.z + gravity_vec.z
-	movement.x = h_velocity.x + gravity_vec.x
-	movement.y = gravity_vec.y
-	move_and_slide(movement, Vector3.UP)
+	velocity = velocity.linear_interpolate(direction * speed, accel * delta)
+	movement = velocity + gravity_vec
+	
+	move_and_slide_with_snap(movement, snap, Vector3.UP)
