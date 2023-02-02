@@ -3,7 +3,7 @@ extends KinematicBody
 # controller variables, add export to the front to expose to editor
 # like: export speed = 7
 var speed = 7
-var default_speed = speed
+var default_speed
 var mouse_sensitivity = 0.1
 var gravity = 9.8
 var jump = 5
@@ -34,6 +34,7 @@ onready var camera = $Head/Camera
 # runs once when scene opens
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	default_speed = speed
 
 # processes input from mouse and keyboard
 func _input(event):
