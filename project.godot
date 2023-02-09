@@ -8,10 +8,30 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Button",
+"class": "PluginButton",
+"language": "GDScript",
+"path": "res://addons/csgtomeshinstance/plugin_button.gd"
+} ]
+_global_script_class_icons={
+"PluginButton": ""
+}
+
 [application]
 
 config/name="3D_Game_Template"
+run/main_scene="res://Scenes/Level1.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/resizable=false
+window/size/fullscreen=true
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/csgtomeshinstance/plugin.cfg", "res://addons/godot_icon/plugin.cfg" )
 
 [gui]
 
