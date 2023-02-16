@@ -10,9 +10,9 @@ var jump = 5
 var cam_accel = 40
 
 # sprinting stuff, can export as well
-var sprint_speed = 14
-var can_sprint = false # use sprinting at all
-var toggle_sprint = false # toggle sprint on off instead of holding
+export var sprint_speed = 14
+export var can_sprint = false # use sprinting at all
+export var toggle_sprint = false # toggle sprint on off instead of holding
 var is_sprinting = false
 
 # smooths out jumping acceleration
@@ -101,6 +101,8 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		snap = Vector3.ZERO
 		gravity_vec = Vector3.UP * jump
+		$JumpSound.play()
+		
 	
 	velocity = velocity.linear_interpolate(direction * speed, accel * delta)
 	movement = velocity + gravity_vec
