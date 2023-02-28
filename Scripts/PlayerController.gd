@@ -31,6 +31,8 @@ var gravity_vec = Vector3()
 onready var head = $Head
 onready var camera = $Head/Camera
 
+var suspend_movement = false
+
 # runs once when scene opens
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -39,7 +41,8 @@ func _ready():
 # processes input from mouse and keyboard
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
-		get_tree().quit() # Quits the game
+#		get_tree().quit() # Quits the game
+		suspend_movement = !suspend_movement
 		
 	# to expose mouse on key press, need to add to input map
 	if event.is_action_pressed("change_mouse_input"):
@@ -49,7 +52,7 @@ func _input(event):
 			Input.MOUSE_MODE_VISIBLE:
 				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and not suspend_movement:
 		rotate_y(deg2rad(-event.relative.x * mouse_sensitivity))
 		head.rotate_x(deg2rad(-event.relative.y * mouse_sensitivity))
 		head.rotation.x = clamp(head.rotation.x, deg2rad(-89), deg2rad(89))
@@ -107,4 +110,5 @@ func _physics_process(delta):
 	velocity = velocity.linear_interpolate(direction * speed, accel * delta)
 	movement = velocity + gravity_vec
 	
-	move_and_slide_with_snap(movement, snap, Vector3.UP)
+	if not suspend_movement:
+		move_and_slide_with_snap(movement, snap, Vector3.UP)
