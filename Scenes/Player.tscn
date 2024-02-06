@@ -10,6 +10,7 @@
 script = ExtResource("1_qtton")
 
 [node name="MeshInstance" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("1")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
@@ -17,3 +18,4 @@ shape = SubResource("2")
 
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.1, 2.08165e-12)
+current = true

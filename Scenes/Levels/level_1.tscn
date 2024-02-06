@@ -1,4 +1,19 @@
-[gd_scene load_steps=9 format=3 uid="uid://dfyhc6rflwyd1"]
+[gd_scene load_steps=14 format=3 uid="uid://dfyhc6rflwyd1"]
+
+[ext_resource type="PackedScene" uid="uid://b0q0bnia378s4" path="res://Scenes/Player.tscn" id="1_3wbjw"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uebuw"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_3oduu"]
+sky_material = SubResource("ProceduralSkyMaterial_uebuw")
+
+[sub_resource type="Environment" id="Environment_w7oi5"]
+background_mode = 2
+sky = SubResource("Sky_3oduu")
+tonemap_mode = 2
+glow_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_u3jaq"]
 size = Vector3(30, 1, 20)
@@ -27,8 +42,21 @@ rings = 8
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2rtjn"]
 albedo_color = Color(0.458824, 0.819608, 0.639216, 1)
 
+[sub_resource type="SphereMesh" id="SphereMesh_vp0cx"]
+radius = 2.0
+height = 4.0
+radial_segments = 8
+rings = 8
+
 [node name="Level 1" type="Node3D"]
 metadata/_edit_lock_ = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_w7oi5")
 
 [node name="Ground" type="StaticBody3D" parent="."]
 metadata/_edit_lock_ = true
@@ -61,3 +89,27 @@ mesh = SubResource("SphereMesh_skqgv")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_2rtjn")
 metadata/_edit_lock_ = true
+
+[node name="Tree2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.42457, 2.48618, 7.1815)
+
+[node name="Trunk" type="StaticBody3D" parent="Tree2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49152, 0)
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Tree2/Trunk"]
+mesh = SubResource("CylinderMesh_cje1r")
+surface_material_override/0 = SubResource("StandardMaterial3D_s2mv6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree2/Trunk"]
+shape = SubResource("CylinderShape3D_l62es")
+
+[node name="Leaves" type="MeshInstance3D" parent="Tree2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.68079, 0)
+mesh = SubResource("SphereMesh_vp0cx")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_2rtjn")
+metadata/_edit_lock_ = true
+
+[node name="Player" parent="." instance=ExtResource("1_3wbjw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.90553, 0)
