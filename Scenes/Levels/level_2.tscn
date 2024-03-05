@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bt8tvxl2t44vr"]
+[gd_scene load_steps=19 format=3 uid="uid://bt8tvxl2t44vr"]
 
 [ext_resource type="PackedScene" uid="uid://b0q0bnia378s4" path="res://Scenes/Player.tscn" id="1_3ll4t"]
 [ext_resource type="Material" uid="uid://cx1i646yip0ur" path="res://Materials/BlueGrid.tres" id="2_8gb12"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://067ayyb0ddma" path="res://Models/pool.glb" id="4_rh0yb"]
 [ext_resource type="PackedScene" uid="uid://cyhi8fyx0ml8i" path="res://Models/pigeon.glb" id="5_disa2"]
 [ext_resource type="Script" path="res://Scripts/RespawnPlayer.gd" id="6_oe4dr"]
+[ext_resource type="PackedScene" uid="uid://c5htlhgtk5rti" path="res://Scenes/Components/collectible.tscn" id="7_exr33"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uebuw"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -162,6 +163,35 @@ respawn_point = NodePath("../PlayerReSpawnPoint")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RespawnArea"]
 shape = SubResource("BoxShape3D_6ke1i")
 metadata/_edit_lock_ = true
+
+[node name="collectibles" type="Node3D" parent="."]
+
+[node name="Collectible" parent="collectibles" instance=ExtResource("7_exr33")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9089, 2.14045, 0)
+
+[node name="Collectible2" parent="collectibles" instance=ExtResource("7_exr33")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9089, 2.14045, -1.5731)
+
+[node name="Collectible3" parent="collectibles" instance=ExtResource("7_exr33")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9089, 2.14045, -2.98183)
+
+[node name="Collectible4" parent="collectibles" instance=ExtResource("7_exr33")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9089, 2.14045, -4.69037)
+
+[node name="Collectible5" parent="collectibles" instance=ExtResource("7_exr33")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9089, 2.14045, 1.59509)
+
+[node name="Collectible6" parent="collectibles" instance=ExtResource("7_exr33")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9089, 2.14045, 3.09677)
+
+[node name="Collectible7" parent="collectibles" instance=ExtResource("7_exr33")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9089, 2.14045, 4.79721)
+
+[node name="Collectible8" parent="collectibles" instance=ExtResource("7_exr33")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9089, 2.14045, 6.3073)
+
+[node name="Collectible9" parent="collectibles" instance=ExtResource("7_exr33")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9089, 2.14045, 8.20153)
 
 [connection signal="body_entered" from="RespawnArea" to="RespawnArea" method="_on_body_entered"]
 
