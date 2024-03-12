@@ -1,6 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://dfyhc6rflwyd1"]
+[gd_scene load_steps=19 format=3 uid="uid://dfyhc6rflwyd1"]
 
 [ext_resource type="PackedScene" uid="uid://b0q0bnia378s4" path="res://Scenes/Player.tscn" id="1_3wbjw"]
+[ext_resource type="Material" uid="uid://chkfp1mmjeiau" path="res://Materials/GreenGrid.tres" id="1_ivccj"]
+[ext_resource type="Material" uid="uid://cx1i646yip0ur" path="res://Materials/BlueGrid.tres" id="3_0i6u2"]
+[ext_resource type="PackedScene" uid="uid://cytov7d0ws38j" path="res://Scenes/Components/box.tscn" id="3_iy27p"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uebuw"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -16,12 +19,12 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_u3jaq"]
-size = Vector3(30, 1, 20)
+size = Vector3(30, 10, 20)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ulopl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n3eey"]
-size = Vector3(30, 1, 20)
+size = Vector3(30, 10, 20)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_cje1r"]
 top_radius = 0.4
@@ -48,6 +51,10 @@ height = 4.0
 radial_segments = 8
 rings = 8
 
+[sub_resource type="SphereMesh" id="SphereMesh_jefp8"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_h8phn"]
+
 [node name="Level 1" type="Node3D"]
 metadata/_edit_lock_ = true
 
@@ -59,9 +66,12 @@ shadow_enabled = true
 environment = SubResource("Environment_w7oi5")
 
 [node name="Ground" type="StaticBody3D" parent="."]
-metadata/_edit_lock_ = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -6, 2.08165e-12)
+collision_layer = 2
+collision_mask = 0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+material_override = ExtResource("1_ivccj")
 mesh = SubResource("BoxMesh_u3jaq")
 surface_material_override/0 = SubResource("StandardMaterial3D_ulopl")
 
@@ -71,6 +81,7 @@ shape = SubResource("BoxShape3D_n3eey")
 
 [node name="Tree" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11737, 2.48618, 7.1815)
+visible = false
 
 [node name="Trunk" type="StaticBody3D" parent="Tree"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49152, 0)
@@ -92,6 +103,7 @@ metadata/_edit_lock_ = true
 
 [node name="Tree2" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.42457, 2.48618, 7.1815)
+visible = false
 
 [node name="Trunk" type="StaticBody3D" parent="Tree2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49152, 0)
@@ -113,3 +125,25 @@ metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_3wbjw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.90553, 0)
+collision_mask = 2
+jump_height = 2.0
+
+[node name="Box" parent="." instance=ExtResource("3_iy27p")]
+
+[node name="Box2" parent="." instance=ExtResource("3_iy27p")]
+transform = Transform3D(0.871128, 0.269364, -0.410583, -0.491056, 0.47785, -0.728371, 0, 0.836123, 0.548541, 2.5338, 7.84407, -4.89984)
+
+[node name="Box3" parent="." instance=ExtResource("3_iy27p")]
+transform = Transform3D(0.871128, 0.269364, -0.410583, -0.491056, 0.47785, -0.728371, 0, 0.836123, 0.548541, 2.5338, 10.1282, -4.89984)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.38915, 1.39084, -4.94745)
+collision_layer = 8
+collision_mask = 11
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+material_override = ExtResource("3_0i6u2")
+mesh = SubResource("SphereMesh_jefp8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_h8phn")

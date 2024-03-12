@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0q0bnia378s4"]
+[gd_scene load_steps=6 format=3 uid="uid://b0q0bnia378s4"]
 
 [ext_resource type="Script" path="res://Scripts/FirstPersonController.gd" id="1_qtton"]
+[ext_resource type="Script" path="res://Scripts/pickup.gd" id="2_7e28s"]
 
 [sub_resource type="CapsuleMesh" id="1"]
 
 [sub_resource type="CapsuleShape3D" id="2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j235a"]
+size = Vector3(1.8374, 2.09253, 1.35449)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_qtton")
@@ -19,3 +23,18 @@ shape = SubResource("2")
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.1, 2.08165e-12)
 current = true
+
+[node name="PickupArea" type="Area3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.17063, -1.123)
+collision_layer = 16
+collision_mask = 8
+script = ExtResource("2_7e28s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera/PickupArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0390625, 0.217651, -0.177246)
+shape = SubResource("BoxShape3D_j235a")
+
+[node name="Hand" type="Marker3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.700257, -0.601449, -2.08917)
+
+[connection signal="body_entered" from="Camera/PickupArea" to="Camera/PickupArea" method="_on_body_entered"]
