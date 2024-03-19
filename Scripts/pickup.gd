@@ -34,6 +34,7 @@ func _unhandled_input(_event):
 			else:
 				# pick up object
 				is_picked = true
+				$"../../Pickup".play()
 	
 	# detect user clicked throw
 	if Input.is_action_just_pressed("throw"):
@@ -46,6 +47,7 @@ func _unhandled_input(_event):
 		# remove object
 		pickup_object = null
 		is_picked = false
+		$"../../Throw".play()
 
 func _on_body_entered(body):
 	# first check if an object is picked up

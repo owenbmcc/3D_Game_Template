@@ -22,6 +22,7 @@ var grav_vel: Vector3 # Gravity velocity
 var jump_vel: Vector3 # Jumping velocity
 
 @onready var camera: Camera3D = $Camera
+@onready var footstep_timer = $FootstepTimer
 
 func _ready() -> void:
 	capture_mouse()
@@ -62,6 +63,7 @@ func _walk(delta: float) -> Vector3:
 	var _forward: Vector3 = camera.global_transform.basis * Vector3(move_dir.x, 0, move_dir.y)
 	var walk_dir: Vector3 = Vector3(_forward.x, 0, _forward.z).normalized()
 	walk_vel = walk_vel.move_toward(walk_dir * speed * move_dir.length(), acceleration * delta)
+	play_footstep_sound(walk_vel)
 	return walk_vel
 
 func _gravity(delta: float) -> Vector3:
@@ -72,6 +74,24 @@ func _jump(delta: float) -> Vector3:
 	if jumping:
 		if is_on_floor(): jump_vel = Vector3(0, sqrt(4 * jump_height * gravity), 0)
 		jumping = false
+		$Jump.play() # maybe debug later ... 
 		return jump_vel
 	jump_vel = Vector3.ZERO if is_on_floor() else jump_vel.move_toward(Vector3.ZERO, gravity * delta)
 	return jump_vel
+
+# gets called by collectible on pickup
+func play_pickup_sound():
+	$Pickup.play()
+
+func play_footstep_sound(walk_vel):
+	# if walk vector is greater than zero, we are moving
+	if walk_vel.length_squared() > 0 and is_on_floor():
+		if footstep_timer.is_stopped():
+			$Footstep.pitch_scale = randf_range(0.5, 1.5)
+			$Footstep.play()
+			footstep_timer.wait_time = randf_range(0.25, 0.35)
+			footstep_timer.start()
+
+
+
+

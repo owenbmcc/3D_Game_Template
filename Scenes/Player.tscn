@@ -1,7 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b0q0bnia378s4"]
+[gd_scene load_steps=10 format=3 uid="uid://b0q0bnia378s4"]
 
 [ext_resource type="Script" path="res://Scripts/FirstPersonController.gd" id="1_qtton"]
 [ext_resource type="Script" path="res://Scripts/pickup.gd" id="2_7e28s"]
+[ext_resource type="AudioStream" uid="uid://bj0w5co8iwbc2" path="res://Audio/jump.wav" id="3_en6a2"]
+[ext_resource type="AudioStream" uid="uid://dcpocgflqlmlt" path="res://Audio/throw.wav" id="4_ijggo"]
+[ext_resource type="AudioStream" uid="uid://pmwnihnrxd5t" path="res://Audio/pickup.wav" id="5_ha0m4"]
+[ext_resource type="AudioStream" uid="uid://br2bksndugiel" path="res://Audio/footstep.wav" id="6_81o61"]
 
 [sub_resource type="CapsuleMesh" id="1"]
 
@@ -36,5 +40,28 @@ shape = SubResource("BoxShape3D_j235a")
 
 [node name="Hand" type="Marker3D" parent="Camera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.700257, -0.601449, -2.08917)
+
+[node name="Jump" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.989552, 0)
+stream = ExtResource("3_en6a2")
+volume_db = -12.0
+
+[node name="Throw" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(0.99979, 0, -0.0204713, 0, 1, 0, 0.0204713, 0, 0.99979, 0.92782, 0.420037, -1.71128)
+stream = ExtResource("4_ijggo")
+
+[node name="Pickup" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.682056, 0.369021, -1.91944)
+stream = ExtResource("5_ha0m4")
+volume_db = -18.0
+
+[node name="Footstep" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(0.99979, 0, -0.0204713, 0, 1, 0, 0.0204713, 0, 0.99979, 0.92782, 0.420037, -1.71128)
+stream = ExtResource("6_81o61")
+volume_db = -18.0
+
+[node name="FootstepTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
 
 [connection signal="body_entered" from="Camera/PickupArea" to="Camera/PickupArea" method="_on_body_entered"]

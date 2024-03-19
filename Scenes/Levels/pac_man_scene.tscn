@@ -1,10 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://dvhqxnmeg7qqj"]
+[gd_scene load_steps=18 format=3 uid="uid://dvhqxnmeg7qqj"]
 
 [ext_resource type="PackedScene" uid="uid://b0q0bnia378s4" path="res://Scenes/Player.tscn" id="1_tolg4"]
 [ext_resource type="Script" path="res://Scripts/EnemyNav.gd" id="2_12xnn"]
 [ext_resource type="PackedScene" uid="uid://d073k2ny28f5a" path="res://Models/pacmanmap.glb" id="2_wfauy"]
 [ext_resource type="PackedScene" uid="uid://c5htlhgtk5rti" path="res://Scenes/Components/collectible.tscn" id="3_5uj14"]
 [ext_resource type="PackedScene" uid="uid://kr2wyn6vrgb3" path="res://Scenes/Components/ghost.tscn" id="3_ecoxq"]
+[ext_resource type="Material" uid="uid://chkfp1mmjeiau" path="res://Materials/GreenGrid.tres" id="5_ml2s0"]
+[ext_resource type="Material" uid="uid://cx1i646yip0ur" path="res://Materials/BlueGrid.tres" id="7_g3jtg"]
+[ext_resource type="AudioStream" uid="uid://bmgyq40lcvifu" path="res://Audio/bg_music.mp3" id="8_577ia"]
+[ext_resource type="AudioStream" uid="uid://dnuwoyt8u4mbt" path="res://Audio/ocean.wav" id="8_k2kp4"]
+[ext_resource type="PackedScene" uid="uid://cytov7d0ws38j" path="res://Scenes/Components/box.tscn" id="10_y5o6b"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ck70d"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -24,9 +29,8 @@ vertices = PackedVector3Array(-19.5, 0.895738, -7, -8, 0.895738, -7, -8, 0.89573
 polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 4), PackedInt32Array(6, 5, 7), PackedInt32Array(7, 5, 8), PackedInt32Array(11, 10, 9), PackedInt32Array(13, 12, 14), PackedInt32Array(14, 12, 15), PackedInt32Array(15, 12, 17), PackedInt32Array(15, 17, 16), PackedInt32Array(19, 18, 20), PackedInt32Array(20, 18, 21), PackedInt32Array(24, 23, 22), PackedInt32Array(26, 25, 27), PackedInt32Array(27, 25, 29), PackedInt32Array(27, 29, 28), PackedInt32Array(31, 30, 32), PackedInt32Array(32, 30, 33), PackedInt32Array(35, 34, 36), PackedInt32Array(36, 34, 37), PackedInt32Array(37, 34, 38), PackedInt32Array(42, 41, 39), PackedInt32Array(39, 41, 40), PackedInt32Array(46, 45, 43), PackedInt32Array(43, 45, 44), PackedInt32Array(48, 47, 49), PackedInt32Array(49, 47, 50), PackedInt32Array(52, 51, 53), PackedInt32Array(53, 51, 55), PackedInt32Array(53, 55, 54), PackedInt32Array(59, 58, 56), PackedInt32Array(56, 58, 57), PackedInt32Array(62, 61, 60), PackedInt32Array(64, 63, 65), PackedInt32Array(65, 63, 66), PackedInt32Array(68, 67, 69), PackedInt32Array(69, 67, 70), PackedInt32Array(74, 73, 71), PackedInt32Array(71, 73, 72), PackedInt32Array(78, 77, 75), PackedInt32Array(75, 77, 76), PackedInt32Array(80, 79, 81), PackedInt32Array(81, 79, 82), PackedInt32Array(85, 84, 83), PackedInt32Array(89, 88, 86), PackedInt32Array(86, 88, 87), PackedInt32Array(91, 90, 92), PackedInt32Array(92, 90, 93), PackedInt32Array(95, 94, 96), PackedInt32Array(96, 94, 97), PackedInt32Array(99, 98, 100), PackedInt32Array(100, 98, 101), PackedInt32Array(103, 102, 104), PackedInt32Array(104, 102, 105), PackedInt32Array(107, 106, 108), PackedInt32Array(108, 106, 109), PackedInt32Array(111, 110, 112), PackedInt32Array(112, 110, 113), PackedInt32Array(115, 114, 116), PackedInt32Array(116, 114, 117), PackedInt32Array(117, 114, 118), PackedInt32Array(118, 114, 119), PackedInt32Array(123, 122, 120), PackedInt32Array(120, 122, 121), PackedInt32Array(124, 127, 125), PackedInt32Array(125, 127, 126), PackedInt32Array(131, 130, 128), PackedInt32Array(128, 130, 129), PackedInt32Array(133, 132, 134), PackedInt32Array(134, 132, 135), PackedInt32Array(138, 137, 136), PackedInt32Array(140, 139, 141), PackedInt32Array(141, 139, 142), PackedInt32Array(142, 139, 144), PackedInt32Array(142, 144, 143), PackedInt32Array(147, 146, 145), PackedInt32Array(150, 149, 148), PackedInt32Array(153, 152, 151), PackedInt32Array(156, 155, 154), PackedInt32Array(158, 157, 159), PackedInt32Array(159, 157, 160), PackedInt32Array(166, 165, 161), PackedInt32Array(161, 165, 164), PackedInt32Array(161, 164, 162), PackedInt32Array(162, 164, 163), PackedInt32Array(167, 169, 168), PackedInt32Array(171, 170, 172), PackedInt32Array(172, 170, 173), PackedInt32Array(175, 174, 176), PackedInt32Array(176, 174, 177), PackedInt32Array(177, 174, 178), PackedInt32Array(180, 179, 181), PackedInt32Array(181, 179, 182), PackedInt32Array(184, 183, 185), PackedInt32Array(185, 183, 186), PackedInt32Array(188, 187, 189), PackedInt32Array(189, 187, 191), PackedInt32Array(189, 191, 190), PackedInt32Array(193, 192, 194), PackedInt32Array(194, 192, 195), PackedInt32Array(197, 196, 198), PackedInt32Array(198, 196, 199), PackedInt32Array(201, 200, 202), PackedInt32Array(202, 200, 203), PackedInt32Array(205, 204, 206), PackedInt32Array(206, 204, 207), PackedInt32Array(208, 210, 209), PackedInt32Array(213, 212, 211), PackedInt32Array(215, 214, 216), PackedInt32Array(216, 214, 218), PackedInt32Array(216, 218, 217), PackedInt32Array(221, 220, 219), PackedInt32Array(224, 223, 222), PackedInt32Array(227, 226, 225), PackedInt32Array(230, 229, 228), PackedInt32Array(232, 231, 233), PackedInt32Array(233, 231, 234), PackedInt32Array(234, 231, 235), PackedInt32Array(238, 237, 236), PackedInt32Array(241, 240, 239), PackedInt32Array(243, 242, 244), PackedInt32Array(244, 242, 245), PackedInt32Array(247, 246, 248), PackedInt32Array(248, 246, 249), PackedInt32Array(251, 250, 252), PackedInt32Array(252, 250, 253)]
 
 [sub_resource type="BoxMesh" id="BoxMesh_t6it6"]
+material = ExtResource("5_ml2s0")
 size = Vector3(40, 1, 50)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_af8p8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hb3u1"]
 size = Vector3(40, 1, 50)
@@ -130,7 +134,6 @@ metadata/_edit_lock_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Ground"]
 mesh = SubResource("BoxMesh_t6it6")
-surface_material_override/0 = SubResource("StandardMaterial3D_af8p8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000976562, 0, -0.0461426)
@@ -139,9 +142,26 @@ shape = SubResource("BoxShape3D_hb3u1")
 [node name="pacmanmap" parent="NavigationRegion3D" instance=ExtResource("2_wfauy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.814162, -3.10426, 2.06147)
 
+[node name="Plane" parent="NavigationRegion3D/pacmanmap" index="0"]
+material_override = ExtResource("7_g3jtg")
+
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/pacmanmap/Plane" index="0"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/pacmanmap/Plane/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_d1o1c")
+
+[node name="OceanSound" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3437, 26.2727)
+stream = ExtResource("8_k2kp4")
+volume_db = -12.0
+autoplay = true
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_577ia")
+volume_db = -24.0
+autoplay = true
+
+[node name="Box" parent="." instance=ExtResource("10_y5o6b")]
+transform = Transform3D(0.871128, 0.269364, -0.410583, -0.491056, 0.47785, -0.728371, 0, 0.836123, 0.548541, 2.75541, 1.7346, 1.75426)
 
 [editable path="NavigationRegion3D/pacmanmap"]

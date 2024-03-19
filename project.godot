@@ -112,6 +112,7 @@ throw={
 3d_physics/layer_3="Collectible"
 3d_physics/layer_4="Pickable"
 3d_physics/layer_5="PickupDetector"
+3d_physics/layer_6="Enemies"
 
 [physics]
 
