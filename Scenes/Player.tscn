@@ -65,3 +65,4 @@ wait_time = 0.3
 one_shot = true
 
 [connection signal="body_entered" from="Camera/PickupArea" to="Camera/PickupArea" method="_on_body_entered"]
+[connection signal="body_exited" from="Camera/PickupArea" to="Camera/PickupArea" method="_on_body_exited"]

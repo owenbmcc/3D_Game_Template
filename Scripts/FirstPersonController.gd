@@ -26,6 +26,8 @@ var jump_vel: Vector3 # Jumping velocity
 
 func _ready() -> void:
 	capture_mouse()
+	if global.head_bob_activated:
+		pass #play animation
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:

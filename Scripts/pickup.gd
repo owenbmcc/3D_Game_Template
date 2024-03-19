@@ -9,6 +9,8 @@ var throw_speed = 8
 var pickup_object = null
 var is_picked = false
 
+signal update_console
+
 func _physics_process(_delta):
 	# check that we have an object picked up
 	if pickup_object and is_picked:
@@ -24,6 +26,7 @@ func _physics_process(_delta):
 func _unhandled_input(_event):
 	# if user hits "f" or pickup button
 	if Input.is_action_just_pressed("pickup"):
+		emit_signal("update_console", "")
 		# if object detected
 		if pickup_object:
 			# if object already picked up
@@ -55,3 +58,8 @@ func _on_body_entered(body):
 		# if so, end function here
 		return
 	pickup_object = body
+	emit_signal("update_console", "Press F to pick up box.")
+
+
+func _on_body_exited(body):
+	emit_signal("update_console", "")

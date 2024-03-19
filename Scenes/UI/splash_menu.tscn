@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3 uid="uid://cur5g44hr682u"]
+
+[ext_resource type="Script" path="res://Scripts/menu.gd" id="1_3oys3"]
+[ext_resource type="Texture2D" uid="uid://8bcvbjh8rj0c" path="res://UI/splash.png" id="1_7o5in"]
+[ext_resource type="PackedScene" uid="uid://dfyhc6rflwyd1" path="res://Scenes/Levels/level_1.tscn" id="2_7carc"]
+
+[node name="Splash Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3oys3")
+start_level_scene = ExtResource("2_7carc")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_7o5in")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 100)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Start" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Start"
+
+[node name="Quit" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Quit
+"
+
+[node name="Quit2" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "
+"
+
+[node name="CheckButton" type="CheckButton" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Head Bobble"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Quit2" to="." method="_on_quit_pressed"]
+[connection signal="toggled" from="CenterContainer/VBoxContainer/HBoxContainer/CheckButton" to="." method="_on_check_button_toggled"]

@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbbksu3q3w4iy"]
+
+[ext_resource type="Texture2D" uid="uid://b861q4q6w5sc5" path="res://UI/apple_icon.png" id="1_n346k"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AppleIcon" type="TextureRect" parent="CenterContainer"]
+layout_mode = 2
+texture = ExtResource("1_n346k")
+
+[node name="AppleCount" type="Label" parent="CenterContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Console" type="Label" parent="CenterContainer2"]
+layout_mode = 2
+text = "Preview Text
+"
