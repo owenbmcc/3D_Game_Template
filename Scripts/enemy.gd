@@ -3,7 +3,7 @@ extends CharacterBody3D
 @onready var nav_agent = $NavigationAgent3D
 @export var speed = 3
 @export var patrol_locations : Array[Marker3D]
-@export var game_over_scene : PackedScene
+@export_file var game_over_scene
 
 var patrol_index : int = 0
 var wait_frame : bool = true
@@ -30,8 +30,11 @@ func _physics_process(delta):
 		set_patrol_location()
 		return
 	
+	# enemy attacks player
 	if nav_agent.distance_to_target() < 2 and is_following_player:
-		get_tree().change_scene_to_packed(game_over_scene)
+		global.apple_count = 0
+		global.has_special_key = false
+		get_tree().change_scene_to_file(game_over_scene)
 		return
 	
 	var current_location = global_transform.origin

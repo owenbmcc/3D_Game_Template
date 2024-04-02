@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dvhqxnmeg7qqj"]
+[gd_scene load_steps=22 format=3 uid="uid://dvhqxnmeg7qqj"]
 
 [ext_resource type="PackedScene" uid="uid://cbbksu3q3w4iy" path="res://Scenes/UI/hud.tscn" id="1_03m4c"]
 [ext_resource type="PackedScene" uid="uid://b0q0bnia378s4" path="res://Scenes/Player.tscn" id="1_tolg4"]
@@ -9,9 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://kr2wyn6vrgb3" path="res://Scenes/Components/ghost.tscn" id="3_ecoxq"]
 [ext_resource type="Material" uid="uid://chkfp1mmjeiau" path="res://Materials/GreenGrid.tres" id="5_ml2s0"]
 [ext_resource type="Material" uid="uid://cx1i646yip0ur" path="res://Materials/BlueGrid.tres" id="7_g3jtg"]
+[ext_resource type="PackedScene" uid="uid://csngcq7bgo8y0" path="res://Scenes/Components/special_key.tscn" id="7_l65vp"]
 [ext_resource type="AudioStream" uid="uid://bmgyq40lcvifu" path="res://Audio/bg_music.mp3" id="8_577ia"]
 [ext_resource type="AudioStream" uid="uid://dnuwoyt8u4mbt" path="res://Audio/ocean.wav" id="8_k2kp4"]
 [ext_resource type="PackedScene" uid="uid://cytov7d0ws38j" path="res://Scenes/Components/box.tscn" id="10_y5o6b"]
+[ext_resource type="PackedScene" uid="uid://doxuyivvqyqd4" path="res://Scenes/Components/portal.tscn" id="13_n4n2k"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ck70d"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -121,7 +123,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.57618, 1.21991, -1.99876)
 
 [node name="Collectible7" parent="Collectibles" instance=ExtResource("3_5uj14")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.70819, 1.21991, -1.99876)
-visible = false
 
 [node name="Collectible8" parent="Collectibles" instance=ExtResource("3_5uj14")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.52928, 1.21991, -1.99876)
@@ -174,6 +175,13 @@ autoplay = true
 transform = Transform3D(0.871128, 0.269364, -0.410583, -0.491056, 0.47785, -0.728371, 0, 0.836123, 0.548541, 2.75541, 1.7346, 1.75426)
 collision_mask = 139
 
+[node name="Portal" parent="." instance=ExtResource("13_n4n2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04535, -24.291)
+level_to_load = "res://Scenes/Levels/level_2.tscn"
+
+[node name="Special Key" parent="." instance=ExtResource("7_l65vp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.82539, 1.22152, 16.4601)
+
 [connection signal="update_console" from="Player/Camera/PickupArea" to="UI/HUD" method="_on_pickup_area_update_console"]
 [connection signal="item_collected" from="Collectibles/Collectible" to="UI/HUD" method="_on_collectible_item_collected"]
 [connection signal="item_collected" from="Collectibles/Collectible2" to="UI/HUD" method="_on_collectible_item_collected"]
@@ -185,6 +193,7 @@ collision_mask = 139
 [connection signal="item_collected" from="Collectibles/Collectible8" to="UI/HUD" method="_on_collectible_item_collected"]
 [connection signal="item_collected" from="Collectibles/Collectible9" to="UI/HUD" method="_on_collectible_item_collected"]
 [connection signal="item_collected" from="Collectibles/Collectible10" to="UI/HUD" method="_on_collectible_item_collected"]
+[connection signal="update_console" from="Portal" to="UI/HUD" method="_on_portal_update_console"]
 
 [editable path="Player"]
 [editable path="NavigationRegion3D/pacmanmap"]

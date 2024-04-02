@@ -8,3 +8,7 @@ func _on_collectible_item_collected():
 
 func _on_pickup_area_update_console(message):
 	$CenterContainer2/Console.text = message
+
+func _on_portal_update_console(message):
+
+	$CenterContainer2/Console.text = message

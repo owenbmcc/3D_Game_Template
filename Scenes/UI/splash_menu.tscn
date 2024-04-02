@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cur5g44hr682u"]
+[gd_scene load_steps=3 format=3 uid="uid://cur5g44hr682u"]
 
 [ext_resource type="Script" path="res://Scripts/menu.gd" id="1_3oys3"]
 [ext_resource type="Texture2D" uid="uid://8bcvbjh8rj0c" path="res://UI/splash.png" id="1_7o5in"]
-[ext_resource type="PackedScene" uid="uid://dfyhc6rflwyd1" path="res://Scenes/Levels/level_1.tscn" id="2_7carc"]
 
 [node name="Splash Menu" type="Control"]
 layout_mode = 3
@@ -12,7 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3oys3")
-start_level_scene = ExtResource("2_7carc")
+start_level_scene = "res://Scenes/Levels/pac_man_scene.tscn"
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
