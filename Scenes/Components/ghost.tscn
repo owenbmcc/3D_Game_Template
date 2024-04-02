@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://kr2wyn6vrgb3"]
+[gd_scene load_steps=8 format=3 uid="uid://kr2wyn6vrgb3"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_ih4s8"]
 [ext_resource type="Material" uid="uid://01e6apmink3c" path="res://Materials/new_material.tres" id="2_x4idn"]
@@ -7,8 +7,19 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jccpp"]
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_ibthw"]
+top_radius = 1.092
+height = 6.0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hgfbx"]
+points = PackedVector3Array(1.05078, 3.04702, 0.574667, -1.13962, 2.47556, -0.187164, -1.13962, 2.47556, 0.19364, 0.574667, -3.04702, 0.19364, 0.384041, 3.04702, -1.13962, -0.377565, -3.04702, -0.472878, -0.377565, 3.04702, 1.1461, -0.472878, -3.04702, 0.384041, -0.758592, 3.04702, -0.948994, 1.1461, 2.95158, -0.377565, 0.479354, -2.66585, -0.472878, 0.288952, -2.85614, 0.574667, 0.384041, 2.95158, 1.1461, -0.948994, 3.04702, 0.765068, -0.567967, -2.95158, -0.282252, -0.187164, 2.47556, -1.13962, 0.19364, -3.04702, -0.567967, 0.860381, 2.76129, -0.853905, -0.282252, -2.85614, 0.574667, 0.860381, 2.85614, 0.860381, -1.13962, 3.04702, -0.377565, 1.1461, 2.5704, 0.19364, 0.574667, -3.04702, -0.187164, -0.567967, -2.95158, 0.288952, -0.282252, -2.95158, -0.567967, -0.948994, 2.85614, -0.758592, -0.187164, 2.5704, 1.1461, -0.758592, 2.95158, 0.95547, 0.574667, -2.47556, 0.384041, -1.13962, 2.85614, 0.384041, -0.377565, 2.85614, -1.13962, 0.574667, 2.66585, -1.04431)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4miql"]
+size = Vector3(1, 1, 0.490234)
+
 [node name="Ghost" type="CharacterBody3D" groups=["enemies"]]
 collision_layer = 32
+collision_mask = 9
 script = ExtResource("1_ih4s8")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -21,3 +32,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00811, 0)
 shape = SubResource("SphereShape3D_jccpp")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
+
+[node name="PlayerDetect" type="Area3D" parent="."]
+transform = Transform3D(-1, 3.48787e-16, -8.74228e-08, 3.48787e-16, 1, -3.48787e-16, 8.74228e-08, -3.48787e-16, -1, 0, 1.00305, -3.09026)
+collision_layer = 64
+
+[node name="CollisionHelper" type="MeshInstance3D" parent="PlayerDetect"]
+transform = Transform3D(1, 0, -1.5246e-23, -1.5246e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+visible = false
+mesh = SubResource("CylinderMesh_ibthw")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="PlayerDetect"]
+transform = Transform3D(1, 0, -1.5246e-23, -1.5246e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_hgfbx")
+
+[node name="HitBox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.13644, 0)
+collision_layer = 128
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0107422)
+shape = SubResource("BoxShape3D_4miql")
+
+[connection signal="body_entered" from="PlayerDetect" to="." method="_on_player_detect_body_entered"]
+[connection signal="body_exited" from="PlayerDetect" to="." method="_on_player_detect_body_exited"]
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]

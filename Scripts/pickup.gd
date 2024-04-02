@@ -76,5 +76,5 @@ func _on_body_entered(body):
 	emit_signal("update_console", "Press F to pick up box.")
 
 
-func _on_body_exited(body):
+func _on_body_exited(_body):
 	emit_signal("update_console", "")
