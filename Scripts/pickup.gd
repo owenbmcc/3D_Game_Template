@@ -33,7 +33,6 @@ func _physics_process(_delta):
 
 # detect user input
 func _unhandled_input(_event):
-	print('pick 1', pickup_object)
 	# if user hits "f" or pickup button
 	if Input.is_action_just_pressed("pickup"):
 		emit_signal("update_console", "")

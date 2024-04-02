@@ -63,11 +63,41 @@ jump_height = 2.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.04872, 1.21991, 2.18372)
 script = ExtResource("2_12xnn")
 
-[node name="Ghost" parent="Enemies" instance=ExtResource("3_ecoxq")]
+[node name="Ghost" parent="Enemies" node_paths=PackedStringArray("patrol_locations") instance=ExtResource("3_ecoxq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.05726, 0, 14.6228)
+patrol_locations = [NodePath("../Patrol1/Marker3D"), NodePath("../Patrol1/Marker3D2"), NodePath("../Patrol1/Marker3D3"), NodePath("../Patrol1/Marker3D4")]
 
-[node name="Ghost2" parent="Enemies" instance=ExtResource("3_ecoxq")]
+[node name="Patrol1" type="Node" parent="Enemies"]
+
+[node name="Marker3D" type="Marker3D" parent="Enemies/Patrol1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.95718, 1.03691, 16.7645)
+
+[node name="Marker3D2" type="Marker3D" parent="Enemies/Patrol1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.95718, 1.03691, 23.018)
+
+[node name="Marker3D3" type="Marker3D" parent="Enemies/Patrol1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.705, 1.03691, 23.018)
+
+[node name="Marker3D4" type="Marker3D" parent="Enemies/Patrol1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.705, 1.03691, 15.3093)
+
+[node name="Ghost2" parent="Enemies" node_paths=PackedStringArray("patrol_locations") instance=ExtResource("3_ecoxq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.88865, 0, -12.4284)
+patrol_locations = [NodePath("../Patrol2/Marker3D"), NodePath("../Patrol2/Marker3D2"), NodePath("../Patrol2/Marker3D3"), NodePath("../Patrol2/Marker3D4")]
+
+[node name="Patrol2" type="Node" parent="Enemies"]
+
+[node name="Marker3D" type="Marker3D" parent="Enemies/Patrol2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.429268, 0.88567, -10.357)
+
+[node name="Marker3D2" type="Marker3D" parent="Enemies/Patrol2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.429268, 0.88567, -23.3972)
+
+[node name="Marker3D3" type="Marker3D" parent="Enemies/Patrol2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.8382, 0.88567, -23.3972)
+
+[node name="Marker3D4" type="Marker3D" parent="Enemies/Patrol2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.8382, 0.88567, -9.70295)
 
 [node name="Collectibles" type="Node3D" parent="."]
 
@@ -106,6 +136,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.52928, 1.21991, 1.5571)
 navigation_mesh = SubResource("NavigationMesh_6acl0")
 
 [node name="Ground" type="StaticBody3D" parent="NavigationRegion3D"]
+collision_layer = 2
 metadata/_edit_lock_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Ground"]
@@ -122,6 +153,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.814162, -3.10426, 2.06147)
 material_override = ExtResource("7_g3jtg")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/pacmanmap/Plane" index="0"]
+collision_layer = 2
+collision_mask = 41
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/pacmanmap/Plane/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_d1o1c")
@@ -139,6 +172,7 @@ autoplay = true
 
 [node name="Box" parent="." instance=ExtResource("10_y5o6b")]
 transform = Transform3D(0.871128, 0.269364, -0.410583, -0.491056, 0.47785, -0.728371, 0, 0.836123, 0.548541, 2.75541, 1.7346, 1.75426)
+collision_mask = 139
 
 [connection signal="update_console" from="Player/Camera/PickupArea" to="UI/HUD" method="_on_pickup_area_update_console"]
 [connection signal="item_collected" from="Collectibles/Collectible" to="UI/HUD" method="_on_collectible_item_collected"]

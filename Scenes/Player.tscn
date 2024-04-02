@@ -15,6 +15,7 @@
 size = Vector3(1.8374, 2.09253, 1.35449)
 
 [node name="Player" type="CharacterBody3D"]
+collision_mask = 126
 script = ExtResource("1_qtton")
 
 [node name="MeshInstance" type="MeshInstance3D" parent="."]
