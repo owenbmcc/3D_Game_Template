@@ -52,10 +52,12 @@ func update_target_location(target_location):
 
 func _on_player_detect_body_entered(body):
 	is_following_player = true
+	$mouse/AnimationPlayer.play("run")
 	$DetectSound.play()
 
 func _on_player_detect_body_exited(body):
 	is_following_player = false
+	$mouse/AnimationPlayer.play("walk")
 	set_patrol_location()
 
 func _on_hitbox_body_entered(body):
