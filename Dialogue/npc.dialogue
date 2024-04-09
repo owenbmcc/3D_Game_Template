@@ -1,0 +1,28 @@
+~ npc_intro
+
+Jerry: [[Hi|Hello|Howdy]], my name is Jerry.
+Owen: Hi.
+Jerry: How's it going?
+- It's bad.
+	Owen: It's bad.
+	=> END
+- It's good.
+	Owen: It's good!
+	=> collect_key
+=> END
+
+~ collect_key
+Jerry: I have a key to the portal. You can exchange 10 apples for the key.
+- Exchange apples.
+	if global.apple_count >= 10:
+		Jerry: Great, here is the key!
+		set global.has_special_key = true
+		set global.apple_count = 0
+		=> END
+	else:
+		Jerry: You don't have enough apples!
+		=> END
+- Keep apples.
+	Jerry: Okay, goodbye!
+	=> END
+=> END

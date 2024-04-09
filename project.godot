@@ -18,6 +18,7 @@ config/icon="res://icon.png"
 [autoload]
 
 global="*res://Scripts/global.gd"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [display]
 
@@ -27,7 +28,7 @@ window/size/fullscreen=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/csg_mesher/plugin.cfg")
+enabled=PackedStringArray("res://addons/csg_mesher/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg")
 
 [gui]
 
@@ -110,6 +111,10 @@ portal={
 ]
 }
 
+[internationalization]
+
+locale/translations_pot_files=PackedStringArray("res://Dialogue/opening.dialogue", "res://Dialogue/npc.dialogue")
+
 [layer_names]
 
 3d_physics/layer_1="Player"
@@ -121,6 +126,8 @@ portal={
 3d_physics/layer_7="PlayerDetector"
 3d_physics/layer_8="EnemyHitbox"
 3d_physics/layer_9="Portal"
+3d_physics/layer_10="NPC"
+3d_physics/layer_11="DialogueDetector"
 
 [physics]
 

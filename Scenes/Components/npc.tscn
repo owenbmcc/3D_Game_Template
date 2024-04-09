@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqt7gikanpgse"]
+
+[ext_resource type="Material" uid="uid://dtadl4vdif20y" path="res://Materials/key_material.tres" id="1_b85cb"]
+[ext_resource type="Script" path="res://Scripts/npc.gd" id="1_i6ljk"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w5pa1"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_usuqb"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ovcv3"]
+height = 0.525713
+radius = 1.60755
+
+[node name="NPC" type="CharacterBody3D"]
+collision_layer = 512
+collision_mask = 43
+script = ExtResource("1_i6ljk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.994874, 0)
+shape = SubResource("CapsuleShape3D_w5pa1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0022, 0)
+material_override = ExtResource("1_b85cb")
+mesh = SubResource("CapsuleMesh_usuqb")
+
+[node name="DialogueDetector" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.10021, 0)
+collision_layer = 1024
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DialogueDetector"]
+shape = SubResource("CylinderShape3D_ovcv3")
+
+[connection signal="body_entered" from="DialogueDetector" to="." method="_on_dialogue_detector_body_entered"]
