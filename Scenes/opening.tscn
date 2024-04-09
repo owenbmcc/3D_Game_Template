@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqxeitxtj1uh8"]
+
+[ext_resource type="Texture2D" uid="uid://32ypdep42gui" path="res://UI/splash.png" id="1_h3nkm"]
+[ext_resource type="Script" path="res://Scripts/opening.gd" id="1_x581l"]
+
+[node name="Opening" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x581l")
+dialog = "res://Dialog/opening.dialogue"
+next_scene = "res://Scenes/UI/splash_menu.tscn"
+dialog_name = "opening"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_h3nkm")

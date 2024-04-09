@@ -8,6 +8,8 @@ var patrol_index : int = 0
 var follow_player : bool = false
 var wait_frame : bool = true
 
+@onready var animation_player = $mouse/AnimationPlayer
+
 func _ready():
 	set_patrol_location()
 	
@@ -40,9 +42,11 @@ func update_target_location(target_location):
 
 func _on_player_detect_body_entered(_body):
 	follow_player = true
+	animation_player.play("run")
 
 func _on_player_detect_body_exited(_body):
 	follow_player = false
+	animation_player.play("walk")
 	set_patrol_location()
 
 func _on_hit_box_body_entered(_body):
