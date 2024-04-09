@@ -60,7 +60,7 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_tolg4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.3284, 2, -10.6488)
 jump_height = 2.0
 
 [node name="Enemies" type="Node3D" parent="."]
@@ -86,7 +86,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.705, 1.03691, 23.018)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.705, 1.03691, 15.3093)
 
 [node name="Ghost2" parent="Enemies" node_paths=PackedStringArray("patrol_locations") instance=ExtResource("3_ecoxq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.88865, 0, -12.4284)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.88865, -0.456189, -12.4284)
 patrol_locations = [NodePath("../Patrol2/Marker3D"), NodePath("../Patrol2/Marker3D2"), NodePath("../Patrol2/Marker3D3"), NodePath("../Patrol2/Marker3D4")]
 
 [node name="Patrol2" type="Node" parent="Enemies"]
