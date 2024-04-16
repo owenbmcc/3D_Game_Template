@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bt8tvxl2t44vr"]
+[gd_scene load_steps=20 format=3 uid="uid://bt8tvxl2t44vr"]
 
 [ext_resource type="PackedScene" uid="uid://b0q0bnia378s4" path="res://Scenes/Player.tscn" id="1_3ll4t"]
 [ext_resource type="Material" uid="uid://cx1i646yip0ur" path="res://Materials/BlueGrid.tres" id="2_8gb12"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cyhi8fyx0ml8i" path="res://Models/pigeon.glb" id="5_disa2"]
 [ext_resource type="Script" path="res://Scripts/RespawnPlayer.gd" id="6_oe4dr"]
 [ext_resource type="PackedScene" uid="uid://c5htlhgtk5rti" path="res://Scenes/Components/collectible.tscn" id="7_exr33"]
+[ext_resource type="PackedScene" uid="uid://cox0s3gloij7i" path="res://Scenes/Components/checkpoint.tscn" id="8_4knbp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uebuw"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -63,6 +64,7 @@ shadow_enabled = true
 environment = SubResource("Environment_w7oi5")
 
 [node name="Ground" type="StaticBody3D" parent="."]
+collision_layer = 2
 metadata/_edit_lock_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
@@ -121,6 +123,7 @@ material_override = ExtResource("2_8gb12")
 mesh = SubResource("ArrayMesh_aptxw")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Pool"]
+collision_layer = 2
 
 [node name="@CollisionShape3D@52790" type="CollisionShape3D" parent="Pool/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_rucyn")
@@ -135,6 +138,7 @@ transform = Transform3D(-0.0191102, 0, 0.999817, 0, 1, 0, -0.999817, 0, -0.01911
 transform = Transform3D(5, 0, 0, 0, 2, 0, 0, 0, 5, 0, -0.169206, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="pool/Cube" index="0"]
+collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pool/Cube/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_364i2")
@@ -192,6 +196,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9089, 2.14045, 6.3073)
 
 [node name="Collectible9" parent="collectibles" instance=ExtResource("7_exr33")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9089, 2.14045, 8.20153)
+
+[node name="Checkpoint" parent="." node_paths=PackedStringArray("player_respawn_position") instance=ExtResource("8_4knbp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -63.0811, 1.94597, 0)
+player_respawn_position = NodePath("../PlayerReSpawnPoint")
 
 [connection signal="body_entered" from="RespawnArea" to="RespawnArea" method="_on_body_entered"]
 

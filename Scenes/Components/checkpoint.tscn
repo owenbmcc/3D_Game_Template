@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=3 uid="uid://cox0s3gloij7i"]
+
+[ext_resource type="Material" uid="uid://dtadl4vdif20y" path="res://Materials/key_material.tres" id="1_lvqyp"]
+[ext_resource type="Script" path="res://Scripts/checkpoint.gd" id="1_qdp75"]
+[ext_resource type="AudioStream" uid="uid://pmwnihnrxd5t" path="res://Audio/pickup.wav" id="3_f4ycb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6yo2k"]
+size = Vector3(2, 0.5, 2)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3dd5y"]
+material = ExtResource("1_lvqyp")
+top_radius = 0.0
+height = 1.0
+
+[sub_resource type="Animation" id="Animation_egoe7"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.489573, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3oc4d"]
+resource_name = "activated"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 5.09824),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(3.48787e-16, 6.28319, 3.48787e-16)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t8heo"]
+_data = {
+"activated": SubResource("Animation_3oc4d"),
+"idle": SubResource("Animation_egoe7")
+}
+
+[node name="Checkpoint" type="Area3D"]
+collision_layer = 2048
+script = ExtResource("1_qdp75")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0258789, 0, 0.00769043)
+shape = SubResource("BoxShape3D_6yo2k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, -3.48787e-16, 1.74846e-07, 3.48787e-16, 1, -3.48787e-16, -1.74846e-07, 3.48787e-16, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_3dd5y")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_t8heo")
+}
+autoplay = "idle"
+playback_default_blend_time = 0.5
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_f4ycb")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
