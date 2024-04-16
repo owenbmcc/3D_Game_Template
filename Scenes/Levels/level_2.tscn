@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://bt8tvxl2t44vr"]
+[gd_scene load_steps=20 format=3 uid="uid://bt8tvxl2t44vr"]
 
 [ext_resource type="PackedScene" uid="uid://b0q0bnia378s4" path="res://Scenes/Player.tscn" id="1_3ll4t"]
 [ext_resource type="Material" uid="uid://cx1i646yip0ur" path="res://Materials/BlueGrid.tres" id="2_8gb12"]
 [ext_resource type="PackedScene" uid="uid://dkoap7anasoma" path="res://Scenes/Components/tree.tscn" id="2_jgwqc"]
-[ext_resource type="PackedScene" uid="uid://067ayyb0ddma" path="res://Models/pool.glb" id="4_rh0yb"]
-[ext_resource type="PackedScene" uid="uid://cyhi8fyx0ml8i" path="res://Models/pigeon.glb" id="5_disa2"]
+[ext_resource type="PackedScene" uid="uid://ywlrbs0vjgkk" path="res://Models/pool.glb" id="4_rh0yb"]
+[ext_resource type="PackedScene" uid="uid://dbou50exiniss" path="res://Models/pigeon.glb" id="5_disa2"]
+[ext_resource type="PackedScene" uid="uid://dvjbsmc5wdobr" path="res://Scenes/Components/checkpoint.tscn" id="6_d5kym"]
 [ext_resource type="Script" path="res://Scripts/RespawnPlayer.gd" id="6_oe4dr"]
 [ext_resource type="PackedScene" uid="uid://c5htlhgtk5rti" path="res://Scenes/Components/collectible.tscn" id="7_exr33"]
 
@@ -63,6 +64,7 @@ shadow_enabled = true
 environment = SubResource("Environment_w7oi5")
 
 [node name="Ground" type="StaticBody3D" parent="."]
+collision_layer = 2
 metadata/_edit_lock_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
@@ -121,6 +123,7 @@ material_override = ExtResource("2_8gb12")
 mesh = SubResource("ArrayMesh_aptxw")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Pool"]
+collision_layer = 2
 
 [node name="@CollisionShape3D@52790" type="CollisionShape3D" parent="Pool/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_rucyn")
@@ -135,6 +138,7 @@ transform = Transform3D(-0.0191102, 0, 0.999817, 0, 1, 0, -0.999817, 0, -0.01911
 transform = Transform3D(5, 0, 0, 0, 2, 0, 0, 0, 5, 0, -0.169206, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="pool/Cube" index="0"]
+collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pool/Cube/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_364i2")
@@ -153,6 +157,10 @@ shape = SubResource("ConcavePolygonShape3D_17hdl")
 
 [node name="PlayerReSpawnPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2, 2.08165e-12)
+
+[node name="Checkpoint" parent="." node_paths=PackedStringArray("level_respawn_point") instance=ExtResource("6_d5kym")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -63.1938, 1.37984, 0)
+level_respawn_point = NodePath("../PlayerReSpawnPoint")
 
 [node name="RespawnArea" type="Area3D" parent="." node_paths=PackedStringArray("respawn_point")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -83.9048, 0)

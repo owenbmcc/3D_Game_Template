@@ -4,17 +4,17 @@
 [ext_resource type="PackedScene" uid="uid://b0q0bnia378s4" path="res://Scenes/Player.tscn" id="1_tolg4"]
 [ext_resource type="Script" path="res://Scripts/EnemyNav.gd" id="2_12xnn"]
 [ext_resource type="Script" path="res://Scripts/hud.gd" id="2_o2v6j"]
-[ext_resource type="PackedScene" uid="uid://d073k2ny28f5a" path="res://Models/pacmanmap.glb" id="2_wfauy"]
+[ext_resource type="PackedScene" uid="uid://ibqoxy2butt7" path="res://Models/pacmanmap.glb" id="2_wfauy"]
 [ext_resource type="PackedScene" uid="uid://c5htlhgtk5rti" path="res://Scenes/Components/collectible.tscn" id="3_5uj14"]
 [ext_resource type="PackedScene" uid="uid://kr2wyn6vrgb3" path="res://Scenes/Components/ghost.tscn" id="3_ecoxq"]
 [ext_resource type="Material" uid="uid://chkfp1mmjeiau" path="res://Materials/GreenGrid.tres" id="5_ml2s0"]
 [ext_resource type="Material" uid="uid://cx1i646yip0ur" path="res://Materials/BlueGrid.tres" id="7_g3jtg"]
-[ext_resource type="PackedScene" uid="uid://csngcq7bgo8y0" path="res://Scenes/Components/special_key.tscn" id="7_l65vp"]
-[ext_resource type="AudioStream" uid="uid://bmgyq40lcvifu" path="res://Audio/bg_music.mp3" id="8_577ia"]
-[ext_resource type="AudioStream" uid="uid://dnuwoyt8u4mbt" path="res://Audio/ocean.wav" id="8_k2kp4"]
+[ext_resource type="PackedScene" path="res://Scenes/Components/special_key.tscn" id="7_l65vp"]
+[ext_resource type="AudioStream" uid="uid://bpgd8l5pwy1fu" path="res://Audio/bg_music.mp3" id="8_577ia"]
+[ext_resource type="AudioStream" uid="uid://dctcf6bpwvgy2" path="res://Audio/ocean.wav" id="8_k2kp4"]
 [ext_resource type="PackedScene" uid="uid://cytov7d0ws38j" path="res://Scenes/Components/box.tscn" id="10_y5o6b"]
-[ext_resource type="PackedScene" uid="uid://doxuyivvqyqd4" path="res://Scenes/Components/portal.tscn" id="13_n4n2k"]
-[ext_resource type="PackedScene" uid="uid://dqt7gikanpgse" path="res://Scenes/Components/npc.tscn" id="15_n51i2"]
+[ext_resource type="PackedScene" path="res://Scenes/Components/portal.tscn" id="13_n4n2k"]
+[ext_resource type="PackedScene" path="res://Scenes/Components/npc.tscn" id="15_n51i2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ck70d"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -183,6 +183,7 @@ level_to_load = "res://Scenes/Levels/level_2.tscn"
 
 [node name="Special Key" parent="." instance=ExtResource("7_l65vp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.82539, 1.22152, 16.4601)
+type = "apple"
 
 [node name="NPC" parent="." instance=ExtResource("15_n51i2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.45241, 0, 8.86829)

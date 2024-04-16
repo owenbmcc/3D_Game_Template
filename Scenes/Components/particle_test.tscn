@@ -1,0 +1,76 @@
+[gd_scene load_steps=14 format=3 uid="uid://h3drj6q4ygff"]
+
+[ext_resource type="Script" path="res://Scripts/particle_test.gd" id="1_gr8ws"]
+
+[sub_resource type="Gradient" id="Gradient_jkp5i"]
+offsets = PackedFloat32Array(0, 0.00280112, 0.394958, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.0504202, 0.0504202, 0.0504202, 1, 0.855963, 0.855963, 0.855963, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_s4j5i"]
+gradient = SubResource("Gradient_jkp5i")
+
+[sub_resource type="Curve" id="Curve_r8r1u"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.857143), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8gjhd"]
+curve = SubResource("Curve_r8r1u")
+
+[sub_resource type="Curve" id="Curve_phru5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ofg3d"]
+curve = SubResource("Curve_phru5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wm3si"]
+lifetime_randomness = 1.0
+particle_flag_align_y = true
+particle_flag_rotate_y = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+spread = 169.951
+angular_velocity_max = 720.0
+gravity = Vector3(2.08165e-12, 1, 2.08165e-12)
+linear_accel_max = 45.63
+damping_max = 0.795
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_ofg3d")
+color = Color(1, 0, 1, 1)
+color_ramp = SubResource("GradientTexture1D_s4j5i")
+emission_curve = SubResource("CurveTexture_8gjhd")
+turbulence_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_fv4e8"]
+offsets = PackedFloat32Array(0, 0.470914, 0.587258, 1)
+colors = PackedColorArray(0.937255, 0.937255, 0.937255, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0.94902, 0.94902, 0.94902, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ghp6a"]
+noise_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nr7dj"]
+seamless = true
+color_ramp = SubResource("Gradient_fv4e8")
+noise = SubResource("FastNoiseLite_ghp6a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nwlc0"]
+blend_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0.509804, 1, 1)
+albedo_texture = SubResource("NoiseTexture2D_nr7dj")
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_m5kqu"]
+material = SubResource("StandardMaterial3D_nwlc0")
+
+[node name="ParticleTest" type="Node3D"]
+script = ExtResource("1_gr8ws")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 64
+one_shot = true
+explosiveness = 0.4
+randomness = 0.3
+process_material = SubResource("ParticleProcessMaterial_wm3si")
+draw_pass_1 = SubResource("QuadMesh_m5kqu")

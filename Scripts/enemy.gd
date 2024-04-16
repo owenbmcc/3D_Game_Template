@@ -4,6 +4,7 @@ extends CharacterBody3D
 @export var speed = 3
 @export var patrol_locations : Array[Marker3D]
 @export_file var game_over_scene
+@export var particle_test : PackedScene
 
 var patrol_index : int = 0
 var wait_frame : bool = true
@@ -60,5 +61,8 @@ func _on_player_detect_body_exited(body):
 	$mouse/AnimationPlayer.play("walk")
 	set_patrol_location()
 
-func _on_hitbox_body_entered(body):
+func _on_hitbox_body_entered(_body):
+	var p = particle_test.instantiate()
+	p.position = position
+	get_parent().add_child(p)
 	queue_free()

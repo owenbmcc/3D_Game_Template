@@ -1,9 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://c5htlhgtk5rti"]
+[gd_scene load_steps=5 format=3 uid="uid://c5htlhgtk5rti"]
 
 [ext_resource type="Script" path="res://Scripts/collectible.gd" id="1_ancuk"]
-[ext_resource type="PackedScene" uid="uid://byogivnfntc2h" path="res://Models/apple.glb" id="1_kocno"]
+[ext_resource type="PackedScene" uid="uid://b6qwaqech71ab" path="res://Models/apple.glb" id="1_kocno"]
+[ext_resource type="AudioStream" uid="uid://pxjakospyijc" path="res://Audio/pickup.wav" id="3_ud7ic"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hmajw"]
+radius = 0.213002
 
 [node name="Collectible" type="Area3D"]
 collision_layer = 4
@@ -13,5 +15,8 @@ script = ExtResource("1_ancuk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_hmajw")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_ud7ic")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

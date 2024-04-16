@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://Scripts/FirstPersonController.gd" id="1_qtton"]
 [ext_resource type="Script" path="res://Scripts/pickup.gd" id="2_7e28s"]
-[ext_resource type="AudioStream" uid="uid://bj0w5co8iwbc2" path="res://Audio/jump.wav" id="3_en6a2"]
-[ext_resource type="AudioStream" uid="uid://dcpocgflqlmlt" path="res://Audio/throw.wav" id="4_ijggo"]
-[ext_resource type="AudioStream" uid="uid://pmwnihnrxd5t" path="res://Audio/pickup.wav" id="5_ha0m4"]
-[ext_resource type="AudioStream" uid="uid://br2bksndugiel" path="res://Audio/footstep.wav" id="6_81o61"]
+[ext_resource type="AudioStream" uid="uid://bqmkjlhsdi7sj" path="res://Audio/jump.wav" id="3_en6a2"]
+[ext_resource type="AudioStream" uid="uid://bj5cwpt7u86bm" path="res://Audio/throw.wav" id="4_ijggo"]
+[ext_resource type="AudioStream" uid="uid://pxjakospyijc" path="res://Audio/pickup.wav" id="5_ha0m4"]
+[ext_resource type="AudioStream" uid="uid://j3r1p7xku0km" path="res://Audio/footstep.wav" id="6_81o61"]
 
 [sub_resource type="CapsuleMesh" id="1"]
 
@@ -15,7 +15,7 @@
 size = Vector3(1.8374, 2.09253, 1.35449)
 
 [node name="Player" type="CharacterBody3D"]
-collision_mask = 126
+collision_mask = 3966
 script = ExtResource("1_qtton")
 
 [node name="MeshInstance" type="MeshInstance3D" parent="."]

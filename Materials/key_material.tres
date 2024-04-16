@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=7 format=3 uid="uid://dtadl4vdif20y"]
+[gd_resource type="StandardMaterial3D" load_steps=7 format=3 uid="uid://cwmwrsuyoel3v"]
 
 [sub_resource type="Gradient" id="Gradient_0umoc"]
 offsets = PackedFloat32Array(0.0792952, 0.77533, 1)
