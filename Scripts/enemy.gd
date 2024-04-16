@@ -5,6 +5,8 @@ extends CharacterBody3D
 @export var patrol_locations : Array[Marker3D]
 @export_file var game_over_scene
 
+@export var ghost_explosion : PackedScene
+
 var patrol_index : int = 0
 var wait_frame : bool = true
 var is_following_player : bool = false
@@ -61,4 +63,7 @@ func _on_player_detect_body_exited(body):
 	set_patrol_location()
 
 func _on_hitbox_body_entered(body):
+	var ge = ghost_explosion.instantiate()
+	ge.position = position # sets particle system to position of enemy
+	get_tree().current_scene.add_child(ge)
 	queue_free()

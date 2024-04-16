@@ -1,0 +1,68 @@
+[gd_scene load_steps=13 format=3 uid="uid://c2w8sblmfe6rm"]
+
+[ext_resource type="Texture2D" uid="uid://d3v71frvqm6cf" path="res://Textures/particle_1.png" id="1_5tge1"]
+[ext_resource type="Script" path="res://Scripts/ghost_explosion.gd" id="1_x31m0"]
+
+[sub_resource type="CurveTexture" id="CurveTexture_o0x6k"]
+
+[sub_resource type="Gradient" id="Gradient_5h8kt"]
+colors = PackedColorArray(1, 0, 0.0470588, 1, 0, 0.415686, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8trg3"]
+gradient = SubResource("Gradient_5h8kt")
+
+[sub_resource type="Curve" id="Curve_yifjp"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_4lt4p"]
+curve = SubResource("Curve_yifjp")
+
+[sub_resource type="Curve" id="Curve_mh8vt"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_a1hv6"]
+curve = SubResource("Curve_mh8vt")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ejrqe"]
+emission_shape = 2
+emission_sphere_radius = 2.0
+direction = Vector3(2.08165e-12, 1, 2.08165e-12)
+initial_velocity_min = 1.0
+initial_velocity_max = 10.0
+angular_velocity_curve = SubResource("CurveTexture_o0x6k")
+radial_velocity_max = 10.0
+damping_min = 1.0
+damping_max = 2.0
+scale_min = 0.1
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_a1hv6")
+color_ramp = SubResource("GradientTexture1D_8trg3")
+emission_curve = SubResource("CurveTexture_4lt4p")
+turbulence_enabled = true
+turbulence_noise_scale = 2.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b3sup"]
+transparency = 1
+blend_mode = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_5tge1")
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_phivl"]
+material = SubResource("StandardMaterial3D_b3sup")
+
+[node name="ghost_explosion" type="Node3D"]
+script = ExtResource("1_x31m0")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 256
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.5
+randomness = 0.5
+visibility_aabb = AABB(-4, -4, -4.28809, 8, 8, 8.57618)
+process_material = SubResource("ParticleProcessMaterial_ejrqe")
+draw_pass_1 = SubResource("QuadMesh_phivl")
