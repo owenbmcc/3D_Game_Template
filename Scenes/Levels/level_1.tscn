@@ -125,10 +125,11 @@ metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_3wbjw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.90553, 0)
-collision_mask = 2
+collision_mask = 10
 jump_height = 2.0
 
 [node name="Box" parent="." instance=ExtResource("3_iy27p")]
+collision_mask = 139
 
 [node name="Box2" parent="." instance=ExtResource("3_iy27p")]
 transform = Transform3D(0.871128, 0.269364, -0.410583, -0.491056, 0.47785, -0.728371, 0, 0.836123, 0.548541, 2.5338, 7.84407, -4.89984)

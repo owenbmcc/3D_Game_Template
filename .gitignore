@@ -16,5 +16,7 @@ Ignore/
 addons/
 demo/
 Builds/
-
+*.blend
+*.blend1
 .DS_Store
+Blenders/
