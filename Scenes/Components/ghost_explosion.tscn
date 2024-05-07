@@ -1,9 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://c2w8sblmfe6rm"]
+[gd_scene load_steps=14 format=3 uid="uid://c2w8sblmfe6rm"]
 
 [ext_resource type="Texture2D" uid="uid://d3v71frvqm6cf" path="res://Textures/particle_1.png" id="1_5tge1"]
 [ext_resource type="Script" path="res://Scripts/ghost_explosion.gd" id="1_x31m0"]
 
+[sub_resource type="Curve" id="Curve_ed7bo"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="CurveTexture" id="CurveTexture_o0x6k"]
+curve = SubResource("Curve_ed7bo")
 
 [sub_resource type="Gradient" id="Gradient_5h8kt"]
 colors = PackedColorArray(1, 0, 0.0470588, 1, 0, 0.415686, 1, 1)
