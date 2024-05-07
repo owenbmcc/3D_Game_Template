@@ -6,6 +6,10 @@ var player_entered = false
 signal update_console
 
 func _unhandled_input(_event):
+	if not player_entered:
+		return
+	if not global.has_special_key:
+		return
 	if Input.is_action_just_pressed("portal"):
 		get_tree().change_scene_to_file(level_to_load)
 
