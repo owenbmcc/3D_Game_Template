@@ -52,7 +52,7 @@ func _unhandled_input(_event):
 				$"../../Pickup".play()
 	
 	# detect user clicked throw
-	if Input.is_action_just_pressed("throw") and pickup_object:
+	if Input.is_action_just_pressed("throw") and pickup_object and is_picked:
 		if pickup_object.freeze:
 			pickup_object.freeze = false
 		# get direction of camera
